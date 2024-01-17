@@ -30,12 +30,21 @@ Wir haben eine Chat-Api mit minimalistischen Frontend erstellt.
 
 ### 1.3 Testfälle
 
-| TC-№ | Ausgangslage | Eingabe | Erwartete Ausgabe |
-| ---- | ------------ | ------- | ----------------- |
-| 1.1  |              |         |                   |
-| ...  |              |         |                   |
+| TC-№ | Ausgangslage                    | Eingabe | Erwartete Ausgabe                                      |
+| ---- | ------------------------------- | ------- | ------------------------------------------------------ |
+| 1.1  | Benutzer ist nicht im Chat      | Login   | Erfolgreicher Login, Benutzer ist im Chat angemeldet.   |
+| 1.2  | Benutzer ist bereits im Chat    | Login   | Fehlermeldung: "Benutzer ist bereits angemeldet."       |
+| 2.1  | Nachricht senden                | Text    | Nachricht wird gesendet und ist im Chat sichtbar.       |
+| 2.2  | Leere Nachricht senden          |         | Fehlermeldung: "Nachricht kann nicht leer sein."        |
+| 3.1  | Nachricht empfangen             |         | Neue Nachricht wird im Chat angezeigt.                  |
+| 4.1  | Nachricht löschen               | Nachricht-ID | Nachricht wird aus der Chat-Historie gelöscht.        |
+| 4.2  | Ungültige Nachricht-ID verwenden |         | Fehlermeldung: "Ungültige Nachricht-ID."               |
+| 5.1  | Emoji in Nachricht einfügen     | 😊      | Emoji wird korrekt in der Nachricht angezeigt.          |
+| 5.2  | Medien in Nachricht einfügen    | Bild    | Medien werden korrekt in der Nachricht angezeigt.       |
+| 6.1  | Benachrichtigung erhalten       |         | Benutzer erhält eine Benachrichtigung über neue Nachricht. |
+| 7.1  | Liste der Unterhaltungen abrufen |         | Liste aller bisherigen Unterhaltungen wird angezeigt.    |
+| 8.1  | Unterhaltung archivieren        |         | Unterhaltung wird archiviert und aus der Hauptansicht entfernt. |
 
-✍️ Die Nummer hat das Format `N.m`, wobei `N` die Nummer der User Story ist, die der Testfall abdeckt, und `m` von `1` an nach oben gezählt. Beispiel: Der dritte Testfall, der die zweite User Story abdeckt, hat also die Nummer `2.3`.
 
 ### 1.4 Diagramme
 
