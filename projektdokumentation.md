@@ -16,12 +16,17 @@ Wir haben eine Chat-Api mit minimalistischen Frontend erstellt.
 
 ### 1.2 User Stories
 
-| US-№ | Verbindlichkeit | Typ  | Beschreibung                       |
-| ---- | --------------- | ---- | ---------------------------------- |
-| 1    |                 |      | Als ein 🤷‍♂️ möchte ich 🤷‍♂️, damit 🤷‍♂️ |
-| ...  |                 |      |                                    |
+| US-№ | Verbindlichkeit | Typ  | Beschreibung                                             |
+| ---- | --------------- | ---- | -------------------------------------------------------- |
+| 1    | Muss            | Funktional  | Als ein Benutzer möchte ich mich in den Chat einloggen können, um an Unterhaltungen teilzunehmen. |
+| 2    | Muss            | Funktional  | Als ein Benutzer möchte ich Nachrichten an andere Benutzer senden können. |
+| 3    | Muss            | Funktional  | Als ein Benutzer möchte ich Nachrichten von anderen Benutzern empfangen können. |
+| 4    | Soll            | Qualität  | Als ein Benutzer möchte ich in der Lage sein, Nachrichten zu löschen, um meine Chat-Historie zu verwalten. |
+| 5    | Muss            | Qualität  | Als ein Benutzer möchte ich in der Lage sein, Emojis und Medien in meine Nachrichten einzufügen. |
+| 6    | Soll            | Qualität  | Als ein Benutzer möchte ich Benachrichtigungen erhalten, wenn mir jemand eine Nachricht sendet. |
+| 7    | Muss            | Funktional  | Als ein Benutzer möchte ich eine Liste meiner bisherigen Unterhaltungen abrufen können. |
+| 8    | Muss            | Qualität  | Als ein Benutzer möchte ich in der Lage sein, Unterhaltungen zu archivieren, um sie aus meiner Hauptansicht zu entfernen. |
 
-✍️ Jede User Story hat eine ganzzahlige Nummer (1, 2, 3 etc.), eine Verbindlichkeit (Muss oder Kann?), und einen Typ (Funktional, Qualität, Rand). Die User Story selber hat folgende Form: *Als ein 🤷‍♂️ möchte ich 🤷‍♂️, damit 🤷‍♂️*.
 
 ### 1.3 Testfälle
 
