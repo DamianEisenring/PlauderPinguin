@@ -1,6 +1,6 @@
 # Projekt-Dokumentation
 
-Joël Haldimann, Jan Frey, Damian Eisenring
+Joël Haldimann, Jan Frey, Damian Eisenring, Plauder Pinguin Macher
 
 | Datum | Version | Zusammenfassung                                              |
 | ----- | ------- | ------------------------------------------------------------ |
