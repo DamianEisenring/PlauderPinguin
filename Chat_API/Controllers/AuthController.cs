@@ -1,4 +1,6 @@
 ﻿using Chat_API.Models;
+using Chat_API.Interfaces;
+using Chat_API.Repositories;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -6,6 +8,8 @@ using Org.BouncyCastle.Crypto.Generators;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace Chat_API.Controllers
 {
@@ -14,12 +18,20 @@ namespace Chat_API.Controllers
  
     public class AuthController : ControllerBase
     {
-        public static User user = new User();
+        private readonly IUserRepository _userRepository;
         private readonly IConfiguration _configuration;
+        private readonly ApplicationDbContext _dbContext;
+        private User user;
+        private UserChat userChat;
 
-        public AuthController(IConfiguration configuration)
+
+        public AuthController(IConfiguration configuration, IUserRepository userRepository, ApplicationDbContext dbContext)
         {
             _configuration = configuration;
+            _userRepository = userRepository;
+            _dbContext = dbContext;
+            user = new User();
+            userChat = new UserChat();
         }
 
         [HttpPost("register")]
@@ -27,10 +39,15 @@ namespace Chat_API.Controllers
         {
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
-            user.Username = request.Username;
-            user.PasswordHash = passwordHash;
+            var newUser = new User
+            {
+                Username = request.Username,
+                PasswordHash = passwordHash
+            };
 
-            return Ok(user);
+            _userRepository.AddUser(newUser);
+
+            return Ok(newUser);
         }
 
         [HttpPost("login")]
@@ -50,6 +67,32 @@ namespace Chat_API.Controllers
 
             return Ok(token);
         }
+
+        [HttpPost("sendMessage")]
+        public ActionResult<UserChat> SendMessage([FromQuery] string receivingUser, [FromQuery] string username, [FromBody] UserChat request)
+        {
+            var sender = _userRepository.GetUserByUsername(username);
+            var receiver = _userRepository.GetUserByUsername(receivingUser);
+
+            if (sender == null || receiver == null)
+            {
+                return BadRequest("Invalid sender or receiver.");
+            }
+
+            var message = new Message
+            {
+                Sender = sender.Username,
+                Receiver = receiver.Username,
+                Content = request.Message,
+                SentAt = DateTime.UtcNow // You may adjust this based on your needs
+            };
+
+            _dbContext.Messages.Add(message);
+            _dbContext.SaveChanges();
+
+            return Ok("Message sent successfully");
+        }
+
 
         private string CreateToken(User user)
         {

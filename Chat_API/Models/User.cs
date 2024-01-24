@@ -1,4 +1,6 @@
-﻿namespace Chat_API.Models
+﻿using Microsoft.EntityFrameworkCore.Design;
+
+namespace Chat_API.Models
 {
     public class User
     {
