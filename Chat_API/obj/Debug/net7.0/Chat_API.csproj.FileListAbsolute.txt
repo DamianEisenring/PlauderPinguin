@@ -101,3 +101,7 @@ C:\Users\damia\source\repos\Chat_API\bin\Debug\net7.0\runtimes\win-arm\native\e_
 C:\Users\damia\source\repos\Chat_API\bin\Debug\net7.0\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\damia\source\repos\Chat_API\bin\Debug\net7.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\damia\source\repos\Chat_API\bin\Debug\net7.0\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\damia\source\repos\Chat_API\bin\Debug\net7.0\Humanizer.dll
+C:\Users\damia\source\repos\Chat_API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\damia\source\repos\Chat_API\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Users\damia\source\repos\Chat_API\bin\Debug\net7.0\System.CodeDom.dll
