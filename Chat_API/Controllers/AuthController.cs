@@ -45,15 +45,19 @@ namespace Chat_API.Controllers
                 PasswordHash = passwordHash
             };
 
-            _userRepository.AddUser(newUser);
+            _dbContext.Users.Add(newUser); // Add the new user to the Users DbSet
+            _dbContext.SaveChanges(); // Save changes to the database
 
             return Ok(newUser);
         }
 
+
         [HttpPost("login")]
         public ActionResult<User> Login(UserDto request)
         {
-            if (user.Username != request.Username)
+            var user = _dbContext.Users.FirstOrDefault(u => u.Username == request.Username);
+
+            if (user == null)
             {
                 return BadRequest("Benutzer nicht gefunden.");
             }
@@ -69,10 +73,10 @@ namespace Chat_API.Controllers
         }
 
         [HttpPost("sendMessage")]
-        public ActionResult<UserChat> SendMessage([FromQuery] string receivingUser, [FromQuery] string username, [FromBody] UserChat request)
+        public ActionResult<UserChat> SendMessage([FromBody] UserChat request)
         {
-            var sender = _userRepository.GetUserByUsername(username);
-            var receiver = _userRepository.GetUserByUsername(receivingUser);
+            var sender = _dbContext.Users.FirstOrDefault(u => u.Username == request.Sender);
+            var receiver = _dbContext.Users.FirstOrDefault(u => u.Username == request.Receiver);
 
             if (sender == null || receiver == null)
             {
@@ -84,7 +88,7 @@ namespace Chat_API.Controllers
                 Sender = sender.Username,
                 Receiver = receiver.Username,
                 Content = request.Message,
-                SentAt = DateTime.UtcNow // You may adjust this based on your needs
+                SentAt = DateTime.UtcNow
             };
 
             _dbContext.Messages.Add(message);
@@ -92,6 +96,36 @@ namespace Chat_API.Controllers
 
             return Ok("Message sent successfully");
         }
+
+
+
+        [HttpGet("getMessages")]
+        public ActionResult<IEnumerable<UserChat>> GetMessages([FromQuery] string username)
+        {
+            var user = _dbContext.Users.FirstOrDefault(u => u.Username == username);
+
+            if (user == null)
+            {
+                return BadRequest("Invalid user.");
+            }
+
+            // Retrieve messages where the user is either the sender or receiver
+            var messages = _dbContext.Messages
+                .Where(m => m.Sender == user.Username || m.Receiver == user.Username)
+                .OrderBy(m => m.SentAt)
+                .ToList();
+
+            // Map messages to UserChat model for response
+            var userChats = messages.Select(m => new UserChat
+            {
+                Sender = m.Sender,
+                Receiver = m.Receiver,
+                Message = m.Content
+            }).ToList();
+
+            return Ok(userChats);
+        }
+
 
 
         private string CreateToken(User user)
