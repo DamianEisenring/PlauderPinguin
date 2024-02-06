@@ -9,6 +9,7 @@ using Chat_API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore.Design;
+using Chat_API.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ISearchRepository, SearchRepository>();
 
 // Inside your builder.Services.AddCors block
 builder.Services.AddCors(options =>

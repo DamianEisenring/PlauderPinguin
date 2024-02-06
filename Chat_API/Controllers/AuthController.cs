@@ -10,6 +10,8 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace Chat_API.Controllers
 {
@@ -21,17 +23,18 @@ namespace Chat_API.Controllers
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration _configuration;
         private readonly ApplicationDbContext _dbContext;
+        private readonly IUserService _userService;
         private User user;
         private UserChat userChat;
 
-
-        public AuthController(IConfiguration configuration, IUserRepository userRepository, ApplicationDbContext dbContext)
+        public AuthController(IConfiguration configuration, IUserRepository userRepository, ApplicationDbContext dbContext, IUserService userService)
         {
             _configuration = configuration;
             _userRepository = userRepository;
             _dbContext = dbContext;
             user = new User();
             userChat = new UserChat();
+            _userService = userService;
         }
 
         [HttpPost("register")]
@@ -98,35 +101,69 @@ namespace Chat_API.Controllers
         }
 
 
+[HttpGet("getMessages")]
+public ActionResult<IEnumerable<UserChat>> GetMessages([FromQuery] string username, [FromQuery] string recipient)
+{
+    var user = _dbContext.Users.FirstOrDefault(u => u.Username == username);
 
-        [HttpGet("getMessages")]
-        public ActionResult<IEnumerable<UserChat>> GetMessages([FromQuery] string username)
+    if (user == null)
+    {
+        return BadRequest("Invalid user.");
+    }
+
+    if (string.IsNullOrEmpty(recipient))
+    {
+        // If no recipient is specified, return all messages for the user
+        var messages = _dbContext.Messages
+            .Where(m => m.Sender == user.Username || m.Receiver == user.Username)
+            .OrderBy(m => m.SentAt)
+            .ToList();
+
+        var userChats = messages.Select(m => new UserChat
         {
-            var user = _dbContext.Users.FirstOrDefault(u => u.Username == username);
+            Sender = m.Sender,
+            Receiver = m.Receiver,
+            Message = m.Content
+        }).ToList();
 
-            if (user == null)
+        return Ok(userChats);
+    }
+    else
+    {
+        // If a recipient is specified, return messages between the user and the recipient
+        var messages = _dbContext.Messages
+            .Where(m => (m.Sender == user.Username && m.Receiver == recipient) || (m.Sender == recipient && m.Receiver == user.Username))
+            .OrderBy(m => m.SentAt)
+            .ToList();
+
+        var userChats = messages.Select(m => new UserChat
+        {
+            Sender = m.Sender,
+            Receiver = m.Receiver,
+            Message = m.Content
+        }).ToList();
+
+        return Ok(userChats);
+    }
+}
+
+
+        [HttpGet("search")]
+        public IActionResult SearchUsers([FromQuery] string search)
+        {
+            try
             {
-                return BadRequest("Invalid user.");
+                // Call a method in your service to search for users based on the provided search string
+                var searchResults = _userService.SearchUsers(search);
+
+                return Ok(searchResults);
             }
-
-            // Retrieve messages where the user is either the sender or receiver
-            var messages = _dbContext.Messages
-                .Where(m => m.Sender == user.Username || m.Receiver == user.Username)
-                .OrderBy(m => m.SentAt)
-                .ToList();
-
-            // Map messages to UserChat model for response
-            var userChats = messages.Select(m => new UserChat
+            catch (Exception ex)
             {
-                Sender = m.Sender,
-                Receiver = m.Receiver,
-                Message = m.Content
-            }).ToList();
-
-            return Ok(userChats);
+                // Log the error or handle it appropriately
+                return StatusCode(500, "Internal Server Error");
+            }
         }
-
-
 
         private string CreateToken(User user)
         {
