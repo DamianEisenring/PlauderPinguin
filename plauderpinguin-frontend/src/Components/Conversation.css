@@ -1,0 +1,54 @@
+.chat-container {
+  width: 400px;
+  height: 400px;
+  overflow-y: auto;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for each chat message */
+.chat-message {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Style for sender's message */
+.sender-message {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+/* Style for recipient's message */
+.recipient-message {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+/* Style for the input area */
+.input-area {
+  margin-top: 20px;
+  display: flex;
+}
+
+/* Style for the message input */
+.message-input {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Style for the send button */
+.send-button {
+  margin-left: 8px;
+  padding: 8px 16px;
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
