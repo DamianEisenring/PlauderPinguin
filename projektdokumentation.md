@@ -4,9 +4,10 @@ Joël Haldimann, Jan Frey, Damian Eisenring, Plauder Pinguin Macher
 
 | Datum | Version | Zusammenfassung                                              |
 | ----- | ------- | ------------------------------------------------------------ |
-|       | 0.0.1   | ✍️ Jedes Mal, wenn Sie an dem Projekt arbeiten, fügen Sie hier eine neue Zeile ein und beschreiben in *einem* Satz, was Sie erreicht haben. |
-|       | ...     |                                                              |
-|       | 1.0.0   |                                                              |
+|   10.01    | 0.0.1   | Wir haben das Projekt zusammen geplant |
+|     17.01  | 0.0.2     |Jedes Gruppenmitglied hat sich zu seinen Aufgaben informiert.|
+|     24.01  | 0.1.0   |Wir unsere Fortschritte verglichen und an unseren Aufträgen gearbeitet.|
+|14.02|0.1.0|Wir haben unsere Projekte zusammengefügt.|
 
 ## 1 Informieren
 
@@ -40,22 +41,22 @@ Wir haben eine Chat-Api mit minimalistischen Frontend erstellt.
 | AP-№ | Frist | Zuständig | Beschreibung | geplante Zeit |
 | ---- | ----- | --------- | ------------ | ------------- |
 |1.A|24.1|Jan Frey|Login| 8 AP|
-|2.A|14.01|Damian Eisenring|Nachrichten senden| 10 AP|
-|3.A|14.01|Joël Haldimann|Nachrichten empfangen|10 AP|
-|4.A|21.01|Damian Eisenring|Nachrichten löschen|5 AP|
-|5.A|21.01|Jan Frey|Bisherige Unterhaltungen abrufen |5 AP|
+|2.A|14.02|Damian Eisenring|Nachrichten senden| 10 AP|
+|3.A|14.02|Joël Haldimann|Nachrichten empfangen|10 AP|
+|4.A|21.02|Damian Eisenring|Nachrichten löschen|5 AP|
+|5.A|21.02|Jan Frey|Bisherige Unterhaltungen abrufen |5 AP|
 
 Total:35 AP
 ## 3 Entscheiden
-
+Wir haben uns entschieden alle Funktionalen anforderungen zu erfüllen, und falls es die Zeit zulässt an den Qualität und Optinalen Bedinungen zu arbeiten.
 
 ## 4 Realisieren
 
 | AP-№ | Datum | Zuständig | geplante Zeit | tatsächliche Zeit |
 | ---- | ----- | --------- | ------------- | ----------------- |
-| 1.A  |       |           |               |                   |
-| ...  |       |           |               |                   |
-
+|1.A|24.01|Jan Frey|8 AP|8 AP|
+|2.A|14.02|Damian Eisenring|10 AP|11 AP|
+|3.A|14.02|Joël Haldimann|10 AP|10 AP|
 
 ## 5 Kontrollieren
 
