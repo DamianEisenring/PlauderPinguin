@@ -91,41 +91,44 @@ const Conversation = ({ loggedInUser }) => {
   return (
     <div>
       <h2 onClick={handleChatOpen}>Conversation</h2>
-      <UserSearch onUserSelected={setRecipientUsername}/>
+      <UserSearch onUserSelected={setRecipientUsername} />
       <div className="chat-container" ref={chatContainerRef}>
-      {recipientUsername && (
-        <div>
+        {recipientUsername && (
           <div>
-            {messages &&
-              messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={`chat-message ${
-                    message.sender === loggedInUser.username
-                      ? "sender-message"
-                      : "recipient-message"
-                  }`}
-                >
-                  <strong>{message.sender}:</strong> {message.message}
-                </div>
-              ))}
+            <div>
+              {messages &&
+                messages.map((message, index) => (
+                  <div
+                    key={index}
+                    className={`chat-message ${
+                      message.sender === loggedInUser.username
+                        ? "sender-message"
+                        : "recipient-message"
+                    }`}
+                  >
+                    <strong>{message.sender}:</strong> {message.message}
+                  </div>
+                ))}
+            </div>
           </div>
-
-          <div className="input-area">
-            <input
-              type="text"
-              className="message-input"
-              value={messageContent}
-              onChange={(e) => setMessageContent(e.target.value)}
-            />
-            <button className="send-button" onClick={handleSendMessage}>
-              Send Message
-            </button>
-          </div>
-        </div>
-      )}
+        )}
       </div>
-      
+      <div className="input-area">
+        <img
+          id="bigPlauderPinguLogo"
+          src="logo192.png"
+          alt="fortnite fussbilder"
+        />
+        <input
+          type="text"
+          className="message-input"
+          value={messageContent}
+          onChange={(e) => setMessageContent(e.target.value)}
+        />
+        <button className="send-button" onClick={handleSendMessage}>
+          Send
+        </button>
+      </div>
     </div>
   );
 };

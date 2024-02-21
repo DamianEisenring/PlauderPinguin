@@ -1,0 +1,33 @@
+.textBox{
+    border: 0.16em solid rgb(255, 255, 255);
+  border-radius: 0.2em;
+}
+
+.button{
+    background-color: white;
+    border-radius: 10px;
+    border-color: white;
+    font-family: helvetica;
+    
+    
+}
+#registerButton{
+  margin-left: 5%
+}
+.button:hover {
+    background-color: #282c34;
+    color: rgb(255, 255, 255);
+  }
+
+
+#buttonBox{
+    margin-top: 20px;
+    margin-right: 0%;
+}
+.userCredentialsForm{
+    display: flex;
+    text-align: left;
+}
+#plauderPinguLogo{
+    width: 25%;
+  }

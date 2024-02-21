@@ -3,7 +3,8 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import Conversation from "./Conversation";
 import { fetchMessages } from "../Context/MessageContext";
-import App from "../App"
+import App from "../App";
+import "./Login.css";
 
 const Login = ({ setLoggedInUser, loggedInUser }) => {
   const [username, setUsername] = useState("");
@@ -31,7 +32,6 @@ const Login = ({ setLoggedInUser, loggedInUser }) => {
             "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
           ],
       });
-
     } catch (error) {
       console.error(
         "Login failed:",
@@ -39,7 +39,7 @@ const Login = ({ setLoggedInUser, loggedInUser }) => {
       );
     }
   };
-  
+
   useEffect(() => {
     console.log(loggedInUser);
     if (loggedInUser && loggedInUser.username) {
@@ -76,25 +76,32 @@ const Login = ({ setLoggedInUser, loggedInUser }) => {
 
   return (
     <div>
-      <h2>Login</h2>
-      <div>
-        <label>Username:</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+      <h2>Login: </h2>
+      <div id="login"></div>
+      <label className="userCredentialsForm"> Username: </label>
+      <input
+        className="textBox"
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <br />
+      <label className="userCredentialsForm"> Password: </label>
+      <input
+        className="textBox"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <div id="buttonBox">
+        <button className="button" onClick={handleLogin}>
+          Login
+        </button>
+        <button id="registerButton" className="button" onClick={handleRegister}>
+          Register
+        </button>
       </div>
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <button onClick={handleLogin}>Login</button>
-      <button onClick={handleRegister}>Register</button>
     </div>
   );
 };

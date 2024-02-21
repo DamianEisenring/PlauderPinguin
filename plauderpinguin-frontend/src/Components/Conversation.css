@@ -9,6 +9,8 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+
+
 /* Style for each chat message */
 .chat-message {
   margin-bottom: 10px;
@@ -18,20 +20,27 @@
 
 /* Style for sender's message */
 .sender-message {
-  background-color: #4caf50;
-  color: #fff;
+  background-color: #A1FF8E;
+  color: #000000;
+  text-align: left;
+  max-width: 100%;
 }
 
 /* Style for recipient's message */
 .recipient-message {
-  background-color: #2196f3;
-  color: #fff;
+  background-color: #8EC3FF;
+  color: #000000;
+  text-align: left;
+  max-width: 100%;
 }
 
 /* Style for the input area */
 .input-area {
   margin-top: 20px;
+  margin-left: 70px;
   display: flex;
+  width:75%;
+
 }
 
 /* Style for the message input */
@@ -46,9 +55,15 @@
 .send-button {
   margin-left: 8px;
   padding: 8px 16px;
-  background-color: #2196f3;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
+  border: 0.16em solid rgb(255, 255, 255);
+  border-radius: 0.5em;
   cursor: pointer;
+}
+.send-button:hover {
+  background-color: #282c34;
+  color: rgb(255, 255, 255);
+}
+
+#bigPlauderPinguLogo{
+  width: 5%;
 }

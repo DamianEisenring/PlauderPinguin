@@ -21,6 +21,7 @@ const UserSearch = ({ onUserSelected }) => {
       }
     } catch (error) {
       console.error("Error searching users:", error);
+
       // Handle the error as needed
     }
   };

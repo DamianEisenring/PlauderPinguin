@@ -1,6 +1,20 @@
 .App {
   text-align: center;
 }
+.App ::-webkit-scrollbar{
+  display: none;
+}
+
+.button{
+  background-color: white;
+  border: 0.16em solid rgb(255, 255, 255);
+  border-radius: 2em;
+  font-family: helvetica;
+  margin-left: 20px;
+  height: 30px;
+  width: 70px;
+  margin-top: 20px;
+}
 
 .App-logo {
   height: 40vmin;
@@ -35,4 +49,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#plauderPinguLogo{
+  width: 30%;
 }
