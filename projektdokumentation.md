@@ -36,14 +36,15 @@ Wir haben eine Chat-Api mit minimalistischen Frontend erstellt.
 | 5.1  | Chats aufrufen  | Benutzer | Chat des Benutzers    |
 
 
-## 2 Planen
-
 | AP-№ | Frist | Zuständig | Beschreibung | geplante Zeit |
 | ---- | ----- | --------- | ------------ | ------------- |
-| 1.A  |       |           |              |               |
-| ...  |       |           |              |               |
+|1.A|24.1|Jan Frey|Login| 8 AP|
+|2.A|14.01|Damian Eisenring|Nachrichten senden| 10 AP|
+|3.A|14.01|Joël Haldimann|Nachrichten empfangen|10 AP|
+|4.A|21.01|Damian Eisenring|Nachrichten löschen|5 AP|
+|5.A|21.01|Jan Frey|Bisherige Unterhaltungen abrufen |5 AP|
 
-Total: 
+Total: 35 AP
 
 
 ## 3 Entscheiden
