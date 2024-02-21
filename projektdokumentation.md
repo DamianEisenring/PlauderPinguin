@@ -45,9 +45,7 @@ Wir haben eine Chat-Api mit minimalistischen Frontend erstellt.
 |4.A|21.01|Damian Eisenring|Nachrichten löschen|5 AP|
 |5.A|21.01|Jan Frey|Bisherige Unterhaltungen abrufen |5 AP|
 
-Total: 35 AP
-
-
+Total:35 AP
 ## 3 Entscheiden
 
 
