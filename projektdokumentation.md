@@ -35,6 +35,7 @@ Wir haben eine Chat-Api mit minimalistischen Frontend erstellt.
 | 4.1  | Nachricht löschen               | Nachricht-ID | Nachricht wird aus der Chat-Historie gelöscht.        |
 | 5.1  | Chats aufrufen  | Benutzer | Chat des Benutzers    |
 
+## 2 Planen
 
 | AP-№ | Frist | Zuständig | Beschreibung | geplante Zeit |
 | ---- | ----- | --------- | ------------ | ------------- |
