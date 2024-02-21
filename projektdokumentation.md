@@ -57,6 +57,8 @@ Wir haben uns entschieden alle Funktionalen anforderungen zu erfüllen, und fall
 |1.A|24.01|Jan Frey|8 AP|8 AP|
 |2.A|14.02|Damian Eisenring|10 AP|11 AP|
 |3.A|14.02|Joël Haldimann|10 AP|10 AP|
+|4.A|21.02|Joël Haldimann|-|-|
+|5.A|21.02|Jan Frey|5 AP|4 AP|
 
 ## 5 Kontrollieren
 
