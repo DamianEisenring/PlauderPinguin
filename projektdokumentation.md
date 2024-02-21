@@ -22,10 +22,7 @@ Wir haben eine Chat-Api mit minimalistischen Frontend erstellt.
 | 2    | Muss            | Funktional  | Als ein Benutzer möchte ich Nachrichten an andere Benutzer senden können. |
 | 3    | Muss            | Funktional  | Als ein Benutzer möchte ich Nachrichten von anderen Benutzern empfangen können. |
 | 4    | Soll            | Qualität  | Als ein Benutzer möchte ich in der Lage sein, Nachrichten zu löschen, um meine Chat-Historie zu verwalten. |
-| 5    | Muss            | Qualität  | Als ein Benutzer möchte ich in der Lage sein, Emojis und Medien in meine Nachrichten einzufügen. |
-| 6    | Soll            | Qualität  | Als ein Benutzer möchte ich Benachrichtigungen erhalten, wenn mir jemand eine Nachricht sendet. |
-| 7    | Muss            | Funktional  | Als ein Benutzer möchte ich eine Liste meiner bisherigen Unterhaltungen abrufen können. |
-| 8    | Muss            | Qualität  | Als ein Benutzer möchte ich in der Lage sein, Unterhaltungen zu archivieren, um sie aus meiner Hauptansicht zu entfernen. |
+| 5    | Muss            | Funktional  | Als ein Benutzer möchte meiner bisherigen Unterhaltungen abrufen können. |
 
 
 ### 1.3 Testfälle
@@ -33,17 +30,10 @@ Wir haben eine Chat-Api mit minimalistischen Frontend erstellt.
 | TC-№ | Ausgangslage                    | Eingabe | Erwartete Ausgabe                                      |
 | ---- | ------------------------------- | ------- | ------------------------------------------------------ |
 | 1.1  | Benutzer ist nicht im Chat      | Login   | Erfolgreicher Login, Benutzer ist im Chat angemeldet.   |
-| 1.2  | Benutzer ist bereits im Chat    | Login   | Fehlermeldung: "Benutzer ist bereits angemeldet."       |
 | 2.1  | Nachricht senden                | Text    | Nachricht wird gesendet und ist im Chat sichtbar.       |
-| 2.2  | Leere Nachricht senden          |         | Fehlermeldung: "Nachricht kann nicht leer sein."        |
 | 3.1  | Nachricht empfangen             |         | Neue Nachricht wird im Chat angezeigt.                  |
 | 4.1  | Nachricht löschen               | Nachricht-ID | Nachricht wird aus der Chat-Historie gelöscht.        |
-| 4.2  | Ungültige Nachricht-ID verwenden |         | Fehlermeldung: "Ungültige Nachricht-ID."               |
-| 5.1  | Emoji in Nachricht einfügen     | 😊      | Emoji wird korrekt in der Nachricht angezeigt.          |
-| 5.2  | Medien in Nachricht einfügen    | Bild    | Medien werden korrekt in der Nachricht angezeigt.       |
-| 6.1  | Benachrichtigung erhalten       |         | Benutzer erhält eine Benachrichtigung über neue Nachricht. |
-| 7.1  | Liste der Unterhaltungen abrufen |         | Liste aller bisherigen Unterhaltungen wird angezeigt.    |
-| 8.1  | Unterhaltung archivieren        |         | Unterhaltung wird archiviert und aus der Hauptansicht entfernt. |
+| 5.1  | Chats aufrufen  | Benutzer | Chat des Benutzers    |
 
 
 ### 1.4 Diagramme
