@@ -63,6 +63,9 @@ Total:35 AP
 
 | TC-№ | Datum | Resultat | Tester |
 | ---- | ----- | -------- | ------ |
-| 1.1  |       |          |        |
-| ...  |       |          |        |
+| 1.1  | 21.02.2024 | OK | Joël Simon Juan Haldimann |
+| 2.1  | 21.02.2024 | OK | Joël Simon Juan Haldimann       |
+| 3.1  | 21.02.2024 | OK | Joël Simon Juan Haldimann       |
+| 4.1  | 21.02.2024 | NOK | Joël Simon Juan Haldimann       |
+| 5.1  | 21.02.2024 | OK | Joël Simon Juan Haldimann       |
 
