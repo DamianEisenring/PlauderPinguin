@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
+using Org.BouncyCastle.Cms;
 
 namespace Chat_API.Controllers
 {
@@ -162,6 +163,33 @@ public ActionResult<IEnumerable<UserChat>> GetMessages([FromQuery] string userna
             {
                 // Log the error or handle it appropriately
                 return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [HttpGet("UserChats")]
+        public IActionResult getUserChats([FromQuery] string username)
+        {
+            var user = _dbContext.Users.FirstOrDefault(u => u.Username == username);
+
+            if (string.IsNullOrEmpty(user.Username))
+            {
+                return BadRequest("Invalid user.");
+            }
+            else
+            {
+                // If a recipient is specified, return messages between the user and the recipient
+                var chatUsers = _dbContext.Messages
+                    .Where(m => m.Sender == user.Username || m.Receiver == user.Username)
+                    .Select(m => m.Sender == user.Username ? m.Receiver : m.Sender)
+                    .Distinct()
+                    .ToList();
+
+                var userChats = chatUsers.Select(u => new UserChat
+                {
+                    Sender = u,
+                }).ToList();
+
+                return Ok(userChats);
             }
         }
 
