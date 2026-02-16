@@ -1,21 +1,40 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import Conversation from "./Conversation";
 import { fetchMessages } from "../Context/MessageContext";
-import App from "../App";
 import "./Login.css";
+import { FaRegUserCircle, FaUser, FaLock } from "react-icons/fa";
 
 const Login = ({ setLoggedInUser, loggedInUser }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState(() =>
+    localStorage.checkbox ? localStorage.username : "",
+  );
+  const [password, setPassword] = useState(() =>
+    localStorage.checkbox ? localStorage.password : "",
+  );
+  const [isChecked, setIsChecked] = useState(() => !!localStorage.checkbox);
+  const [mode, setMode] = useState("login");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (mode === "login") {
+      handleLogin();
+    } else {
+      handleRegister();
+    }
+  };
 
   const handleLogin = async () => {
     try {
       const response = await axios.post(
         "https://localhost:7232/api/auth/login",
-        { username, password }
+        { username, password },
       );
+      if (isChecked && username !== "") {
+        localStorage.username = username;
+        localStorage.password = password;
+        localStorage.checkbox = isChecked ? "1" : "";
+      }
 
       console.log("Login response:", response.data);
 
@@ -35,7 +54,7 @@ const Login = ({ setLoggedInUser, loggedInUser }) => {
     } catch (error) {
       console.error(
         "Login failed:",
-        error.response ? error.response.data : error.message
+        error.response ? error.response.data : error.message,
       );
     }
   };
@@ -50,11 +69,6 @@ const Login = ({ setLoggedInUser, loggedInUser }) => {
     console.log(loggedInUser);
   }, [loggedInUser]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setLoggedInUser(null);
-  };
-
   const handleRegister = async () => {
     try {
       const response = await axios.post(
@@ -62,45 +76,69 @@ const Login = ({ setLoggedInUser, loggedInUser }) => {
         {
           username,
           password,
-        }
+        },
       );
 
       console.log("Registration successful:", response.data);
+      handleLogin();
     } catch (error) {
       console.error(
         "Registration failed:",
-        error.response ? error.response.data : error.message
+        error.response ? error.response.data : error.message,
       );
     }
   };
 
   return (
-    <div>
-      <h2>Login: </h2>
-      <div id="login"></div>
-      <label className="userCredentialsForm"> Username: </label>
-      <input
-        className="textBox"
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <br />
-      <label className="userCredentialsForm"> Password: </label>
-      <input
-        className="textBox"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+    <div className="login-page">
+      <div className="login-container">
+        <FaRegUserCircle id="login-icon" />
+        <div className="login-form">
+          <div className="form-group">
+            <FaUser className="input-icon" />
+            <input
+              placeholder="Username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <FaLock className="input-icon" />
+            <input
+              placeholder="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="remember-me">
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              checked={isChecked}
+              name="lsRememberMe"
+              onChange={(e) => setIsChecked(e.target.checked)}
+            />
+            <label>Remember me</label>
+          </div>
 
-      <div id="buttonBox">
-        <button className="button" onClick={handleLogin}>
-          Login
-        </button>
-        <button id="registerButton" className="button" onClick={handleRegister}>
-          Register
-        </button>
+          <label
+            onClick={() =>
+              setMode((prev) => (prev === "login" ? "register" : "login"))
+            }
+          >
+            {mode === "login"
+              ? "Create Account"
+              : "Already have an account?"}{" "}
+          </label>
+        </div>
+        <div className="button-container">
+          <button onClick={handleSubmit}>
+            {mode === "login" ? "Login" : "Sign Up"}
+          </button>
+        </div>
       </div>
     </div>
   );

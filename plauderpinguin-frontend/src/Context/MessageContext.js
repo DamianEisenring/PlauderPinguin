@@ -89,3 +89,33 @@ export const searchUsers = async (searchQuery) => {
     return [];
   }
 };
+
+
+export const fetchUserChats = async (loggedInUser) => {
+  try {
+    if (loggedInUser && loggedInUser.username) {
+      const token = localStorage.getItem("token");
+
+      const response = await axios.get(
+        "https://localhost:7232/api/auth/UserChats",
+        {
+          params: {
+            username: loggedInUser.username,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("Fetched user chats:", response.data);
+      return response.data;
+    }
+  } catch (error) {
+    console.error(
+      "Error fetching user chats:",
+      error.response ? error.response.data : error.message
+    );
+    return [];
+  }
+};

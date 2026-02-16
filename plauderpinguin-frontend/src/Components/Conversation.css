@@ -1,49 +1,82 @@
-.chat-container {
-  width: 400px;
-  height: 400px;
-  overflow-y: auto;
-  margin: 20px auto;
+.conversation-container {
+  display: flex;
+  flex-direction: row;
+  height: 90%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.chat-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  max-width: 300px;
   padding: 20px;
-  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.user-search {
+  margin-bottom: 20px;
+}
+
+.chat-item {
+  padding: 10px;
+  margin-top: 5px;
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: #d0e4f5;
+  transition: background 0.2s;
+}
+
+.chat-item.active {
+  background-color: #769fcd;
+  color: white;
+}
+
+.chat-main {
+  flex-grow: 1;
+  margin: 20px;
+  padding: 20px;
   border-radius: 8px;
+  height: 100%;
+  background-color: #B9D7EA;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.messages-list {
+  flex-grow: 1;
+  overflow-y: auto;
+}
 
-
-/* Style for each chat message */
 .chat-message {
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 8px;
+  max-width: 70%;
 }
 
-/* Style for sender's message */
 .sender-message {
-  background-color: #A1FF8E;
-  color: #000000;
-  text-align: left;
-  max-width: 100%;
+  background-color: #4caf50;
+  color: white;
+  align-self: flex-end;
 }
 
-/* Style for recipient's message */
 .recipient-message {
-  background-color: #8EC3FF;
-  color: #000000;
-  text-align: left;
-  max-width: 100%;
+  background-color: #2196f3;
+  color: white;
+  align-self: flex-start;
 }
 
-/* Style for the input area */
 .input-area {
-  margin-top: 20px;
-  margin-left: 70px;
+  margin-top: auto;
   display: flex;
-  width:75%;
-
 }
 
-/* Style for the message input */
 .message-input {
   flex-grow: 1;
   padding: 8px;
@@ -51,19 +84,12 @@
   border-radius: 4px;
 }
 
-/* Style for the send button */
 .send-button {
   margin-left: 8px;
   padding: 8px 16px;
-  border: 0.16em solid rgb(255, 255, 255);
-  border-radius: 0.5em;
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-}
-.send-button:hover {
-  background-color: #282c34;
-  color: rgb(255, 255, 255);
-}
-
-#bigPlauderPinguLogo{
-  width: 5%;
 }

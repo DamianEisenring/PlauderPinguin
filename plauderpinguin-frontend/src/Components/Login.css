@@ -1,33 +1,108 @@
-.textBox{
-    border: 0.16em solid rgb(255, 255, 255);
-  border-radius: 0.2em;
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #B9D7EA;
+  border-radius: 25px;
+  box-shadow:  0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.button{
-    background-color: white;
-    border-radius: 10px;
-    border-color: white;
-    font-family: helvetica;
-    
-    
+.login-container {
+  position: relative; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 30px 30px 30px; 
+  width: 90%;
+  max-width: 400px;
 }
-#registerButton{
-  margin-left: 5%
-}
-.button:hover {
-    background-color: #282c34;
-    color: rgb(255, 255, 255);
-  }
 
+#login-icon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(4em, 8vw, 6em);
+  color: #769FCD;
+  background-color: #B9D7EA;
+  border-radius: 50%;
+}
 
-#buttonBox{
-    margin-top: 20px;
-    margin-right: 0%;
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 300px;
 }
-.userCredentialsForm{
-    display: flex;
-    text-align: left;
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
 }
-#plauderPinguLogo{
-    width: 25%;
-  }
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 16px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 10px 10px 40px; 
+  box-sizing: border-box;
+}
+.login-form button {
+  padding: 10px;
+  background-color: #769FCD;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.login-form button:hover {
+  background-color: #5A7FA3;
+}
+.remember-me {
+  display: flex;
+  align-items: center;     
+  justify-content: space-between;
+  width: 300px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;      
+  gap: 6px;               
+}
+
+.checkbox-container input {
+  margin: 0;
+  width: 16px;
+  height: 16px;             
+}
+
+.remember-me label {
+  font-size: 14px;
+  color: #555;
+  margin: 0;                
+  line-height: 1;          
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+  width: 300px;
+}
+.button-container button {
+  flex: 1;
+  padding: 10px;
+  background-color: #769FCD;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

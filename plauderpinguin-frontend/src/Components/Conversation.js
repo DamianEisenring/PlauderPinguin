@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   sendUserMessage,
   fetchMessages,
-  searchUsers,
+  fetchUserChats,
 } from "../Context/MessageContext";
 import UserSearch from "./UserSearch";
-import "./Conversation.css"; // Import the CSS file
+import "./Conversation.css";
 
 const Conversation = ({ loggedInUser }) => {
   const [messageContent, setMessageContent] = useState("");
@@ -13,6 +13,7 @@ const Conversation = ({ loggedInUser }) => {
   const [recipientUsername, setRecipientUsername] = useState("");
   const [isNewMessage, setIsNewMessage] = useState(false);
   const chatContainerRef = useRef(null);
+  const [chats, setChats] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,10 +23,9 @@ const Conversation = ({ loggedInUser }) => {
           console.log("Fetched Data:", data);
           setMessages(data);
 
-          // Scroll to the bottom only when there's a new message
           if (isNewMessage) {
             scrollToBottom();
-            setIsNewMessage(false); // Reset the flag after scrolling
+            setIsNewMessage(false);
           }
         }
       } catch (error) {
@@ -50,19 +50,35 @@ const Conversation = ({ loggedInUser }) => {
     };
   }, [loggedInUser, recipientUsername, isNewMessage]);
 
+  useEffect(() => {
+    const loadChats = async () => {
+      if (!loggedInUser) return;
+
+      try {
+        const data = await fetchUserChats(loggedInUser);
+        console.log("Chats:", data);
+        setChats(data);
+      } catch (err) {
+        console.error("Error fetching chats:", err);
+      }
+    };
+
+    loadChats();
+  }, [loggedInUser]);
+
   const handleSendMessage = async () => {
     try {
       const success = await sendUserMessage(
         loggedInUser,
         recipientUsername,
-        messageContent
+        messageContent,
       );
 
       if (success) {
         // Optionally, you can fetch messages again after sending a message
         const updatedMessages = await fetchMessages(
           loggedInUser,
-          recipientUsername
+          recipientUsername,
         );
         setMessages(updatedMessages);
 
@@ -88,46 +104,82 @@ const Conversation = ({ loggedInUser }) => {
     scrollToBottom();
   };
 
+  const handleChatSelect = async (username) => {
+    setRecipientUsername(username);
+
+    try {
+      const data = await fetchMessages(loggedInUser, username);
+      setMessages(data);
+
+      // kleines Timeout, damit DOM schon gerendert ist
+      setTimeout(() => {
+        scrollToBottom();
+      }, 0);
+    } catch (err) {
+      console.error("Error opening chat:", err);
+    }
+  };
+
   return (
-    <div>
-      <h2 onClick={handleChatOpen}>Conversation</h2>
-      <UserSearch onUserSelected={setRecipientUsername} />
-      <div className="chat-container" ref={chatContainerRef}>
-        {recipientUsername && (
-          <div>
-            <div>
-              {messages &&
-                messages.map((message, index) => (
-                  <div
-                    key={index}
-                    className={`chat-message ${
-                      message.sender === loggedInUser.username
-                        ? "sender-message"
-                        : "recipient-message"
-                    }`}
-                  >
-                    <strong>{message.sender}:</strong> {message.message}
-                  </div>
-                ))}
-            </div>
+    <div className="conversation-container">
+      <div className="chat-sidebar">
+        <UserSearch
+          onUserSelected={setRecipientUsername}
+          className="user-search"
+        />
+        {chats.map((chat, index) => (
+          <div
+            key={chat.sender || index}
+            className={`chat-item ${
+              recipientUsername === chat.sender ? "active" : ""
+            }`}
+            onClick={() => handleChatSelect(chat.sender)}
+          >
+            {chat.sender}
           </div>
-        )}
+        ))}
       </div>
-      <div className="input-area">
-        <img
-          id="bigPlauderPinguLogo"
-          src="logo192.png"
-          alt="fortnite fussbilder"
-        />
-        <input
-          type="text"
-          className="message-input"
-          value={messageContent}
-          onChange={(e) => setMessageContent(e.target.value)}
-        />
-        <button className="send-button" onClick={handleSendMessage}>
-          Send
-        </button>
+
+      <div className="chat-main" ref={chatContainerRef}>
+        <h2 onClick={handleChatOpen}>{recipientUsername}</h2>
+
+        {recipientUsername && (
+          <>
+            <div className="messages-list">
+              {messages.map((msg, i) => (
+                <div
+                  key={i}
+                  className={`chat-message ${
+                    msg.sender === loggedInUser.username
+                      ? "sender-message"
+                      : "recipient-message"
+                  }`}
+                >
+                  <strong>{msg.sender}: </strong>
+                  {msg.message}
+                </div>
+              ))}
+            </div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSendMessage();
+              }}
+              className="input-area"
+            >
+              <input
+                type="text"
+                value={messageContent}
+                onChange={(e) => setMessageContent(e.target.value)}
+                className="message-input"
+              />
+              <button type="submit" className="send-button">
+                Send
+              </button>
+            </form>
+          </>
+        )}
       </div>
     </div>
   );
