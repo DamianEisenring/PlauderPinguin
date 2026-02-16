@@ -6,34 +6,27 @@ import Conversation from "./Components/Conversation";
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
 
-  function refreshPage() {
-    window.location.reload(false);
-  }
-
   return (
     <div className="App">
       <header className="App-header">
-        <h1>
-          PlauderPinguin
-          <br />
-          <img
-            id="plauderPinguLogo"
-            src="logo192.png"
-            alt="fortnite fussbilder"
-          />
-        </h1>
-
-        {!loggedInUser ? (
-          <Login setLoggedInUser={setLoggedInUser} />
-        ) : (
-          <div>
-            <Conversation loggedInUser={loggedInUser} />
-            <button className="button" onClick={refreshPage}>
-              Logout
-            </button>
-          </div>
-        )}
+        <img
+          src="/PlauderPinguinpng-cutout.png"
+          alt="Plauderpinguin Logo"
+          className="logo"
+        />
+        <h1>Plauderpinguin</h1>
       </header>
+      
+      <div className={loggedInUser ? "conversation-body" : "login-body"}>
+        {loggedInUser ? (
+          <Conversation loggedInUser={loggedInUser} />
+        ) : (
+          <Login 
+            setLoggedInUser={setLoggedInUser} 
+            loggedInUser={loggedInUser} 
+          />
+        )}
+      </div>
     </div>
   );
 }
